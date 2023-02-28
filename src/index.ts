@@ -36,6 +36,7 @@ app.get("/api/v1/users", userRouter);
 app.get("/api/v1/users/:id", userRouter);
 app.post("/api/v1/users/register", userRouter);
 app.post("/api/v1/users/login", userRouter);
+app.put("/api/v1/users/:id", userRouter);
 app.put("/api/v1/users/profile/:id", userRouter);
 app.delete("/api/v1/users/:id", userRouter);
 

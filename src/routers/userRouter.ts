@@ -119,7 +119,7 @@ router.post("/api/v1/users/register", async (req, res) => {
 
 router.post("/api/v1/users/login", async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+
   try {
     const user = await User.findOne({ where: { email } });
 
@@ -149,6 +149,33 @@ router.post("/api/v1/users/login", async (req, res) => {
   }
 });
 
+router.put("/api/v1/users/:id", async (req, res) => {
+  const userId = req.params.id;
+  const { is_admin, is_blocked } = req.body;
+  console.log(req.body);
+  try {
+    const user = await User.findOne({ where: { id: userId } });
+    if (!user) {
+      return res.status(404).json({ message: "This user not exists in the system" });
+    }
+
+    const updatedData = { is_admin, is_blocked };
+
+    const dataToUpdate = Object.keys(updatedData).filter(key => updatedData[key] !== undefined);
+
+    dataToUpdate.forEach(key => (user[key] = updatedData[key]));
+
+    await user.save();
+
+    return res.status(200).json(user);
+  } catch (error) {
+    logger.error(error.stack);
+    logger.error(error.message);
+    logger.error(error.errors[0].message);
+    return res.status(500).json({ error: error.errors[0].message });
+  }
+});
+
 router.put("/api/v1/users/profile/:id", async (req, res) => {
   const userId = req.params.id;
   const {
@@ -162,7 +189,7 @@ router.put("/api/v1/users/profile/:id", async (req, res) => {
     birth_date,
     avatar_image,
   } = req.body;
-  console.log(req.body);
+
   try {
     if (email !== undefined || username !== undefined || phone !== undefined) {
       const existingUser = await User.findOne({
