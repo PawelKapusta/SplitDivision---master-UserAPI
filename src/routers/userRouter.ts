@@ -152,7 +152,7 @@ router.post("/api/v1/users/login", async (req, res) => {
 router.put("/api/v1/users/:id", async (req, res) => {
   const userId = req.params.id;
   const { is_admin, is_blocked } = req.body;
-  console.log(req.body);
+
   try {
     const user = await User.findOne({ where: { id: userId } });
     if (!user) {
