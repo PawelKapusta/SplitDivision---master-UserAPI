@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel";
 import { isServiceType } from "../utils/isServiceType";
 import { logger } from "../utils/logger";
+import { AVATAR_IMAGE_DEFAULT } from "../constants/constants";
 
 const router = express.Router();
 
@@ -46,7 +47,7 @@ router.get("/api/v1/users/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/api/v1/users/register", async (req, res) => {
-  const {
+  let {
     first_name,
     last_name,
     password,
@@ -83,6 +84,10 @@ router.post("/api/v1/users/register", async (req, res) => {
     }
 
     const isCorrectService = isServiceType(service);
+
+    if (avatar_image === undefined || avatar_image === null) {
+      avatar_image = AVATAR_IMAGE_DEFAULT[gender.toUpperCase()];
+    }
 
     if (isCorrectService) {
       const hashedPassword = await bcrypt.hash(password, 12);
