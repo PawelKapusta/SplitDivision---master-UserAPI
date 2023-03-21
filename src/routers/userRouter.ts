@@ -47,7 +47,7 @@ router.get("/api/v1/users/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/api/v1/users/register", async (req, res) => {
-  let {
+  const {
     first_name,
     last_name,
     password,
@@ -57,10 +57,10 @@ router.post("/api/v1/users/register", async (req, res) => {
     email,
     phone,
     birth_date,
-    avatar_image,
     is_admin,
     is_blocked,
   } = req.body;
+  let { avatar_image } = req.body;
 
   try {
     const existingUser = await User.findOne({
