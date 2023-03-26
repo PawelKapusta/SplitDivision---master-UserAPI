@@ -1,22 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../database/config";
 import { parsePhoneNumber } from "libphonenumber-js";
-
-interface UserAttributes {
-  id: string;
-  first_name: string;
-  last_name: string;
-  password: string;
-  username: string;
-  gender: string;
-  service: string;
-  email: string;
-  phone: string;
-  birth_date: Date;
-  is_admin: boolean;
-  is_blocked: boolean;
-  avatar_image: string;
-}
+import { UserAttributes } from "../constants/constants";
 
 class User extends Model<UserAttributes, Optional<UserAttributes, "id">> implements UserAttributes {
   public id!: string;
