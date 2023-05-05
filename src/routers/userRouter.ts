@@ -128,7 +128,7 @@ router.post(
       logger.error(error.stack);
       logger.error(error.message);
       logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.errors[0].message, validationErrors: error.errors});
     }
   },
 );
@@ -140,7 +140,6 @@ router.post(
     res: Response<JWTtoken | ErrorType>,
   ) => {
     const { email, password }: Pick<UserAttributes, "email" | "password"> = req.body;
-
     try {
       const user: UserAttributes = await User.findOne({ where: { email } });
 
