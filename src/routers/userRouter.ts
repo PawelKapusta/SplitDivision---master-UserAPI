@@ -158,7 +158,7 @@ router.post(
         email: user.email,
       };
 
-      const token: string = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
+      const token: string = jwt.sign(tokenPayload, process.env.JWT_SECRET_KEY); // , { expiresIn: "1h" } disable for development
 
       const tokenResponse: JWTtoken = { JWT: token };
 
@@ -222,7 +222,16 @@ router.put(
       if (email !== undefined || username !== undefined || phone !== undefined) {
         const existingUser = await User.findOne({
           where: {
-            [Op.or]: [{ email }, { username }, { phone }],
+            [Op.and]: [
+              { id: { [Op.not]: userId } }, // Exclude user with ID 1
+              {
+                [Op.or]: [
+                  { email },
+                  { username },
+                  { phone },
+                ],
+              },
+            ],
           },
         });
 
