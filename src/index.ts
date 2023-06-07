@@ -31,7 +31,6 @@ app.get("/", (req, res) => {
   res.send("Hello World! from User API");
 });
 
-//users
 app.get("/api/v1/users", userRouter);
 app.get("/api/v1/users/:id", userRouter);
 app.post("/api/v1/users/register", userRouter);
