@@ -23,7 +23,7 @@ export interface JWTtoken {
   JWT: string;
 }
 
-export type ErrorType = string | { error: string, validationErrors?: []};
+export type ErrorType = string | { error: string; validationErrors?: [] };
 
 export type UpdateUserRequest = {
   params: {

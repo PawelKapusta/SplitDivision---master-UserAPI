@@ -1,5 +1,4 @@
-import express from "express";
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 import { Op } from "sequelize";
@@ -8,12 +7,12 @@ import User from "../models/userModel";
 import { isServiceType } from "../utils/isServiceType";
 import { logger } from "../utils/logger";
 import {
-  UserAttributes,
-  ErrorType,
   AVATAR_IMAGE_DEFAULT,
-  JWTTokenAttributesPayload,
+  ErrorType,
   JWTtoken,
+  JWTTokenAttributesPayload,
   UpdateUserRequest,
+  UserAttributes,
 } from "../constants/constants";
 
 const router = express.Router();
@@ -30,7 +29,7 @@ router.get("/api/v1/users", async (req: Request, res: Response<UserAttributes[] 
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    return res.status(500).json({ error: error.message});
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -127,7 +126,9 @@ router.post(
       logger.error(error.stack);
       logger.error(error.message);
       logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message, validationErrors: error.errors});
+      return res
+        .status(500)
+        .json({ error: error.errors[0].message, validationErrors: error.errors });
     }
   },
 );
@@ -222,13 +223,9 @@ router.put(
         const existingUser = await User.findOne({
           where: {
             [Op.and]: [
-              { id: { [Op.not]: userId } }, // Exclude user with ID 1
+              { id: { [Op.not]: userId } },
               {
-                [Op.or]: [
-                  { email },
-                  { username },
-                  { phone },
-                ],
+                [Op.or]: [{ email }, { username }, { phone }],
               },
             ],
           },
