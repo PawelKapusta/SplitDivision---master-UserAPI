@@ -39,7 +39,9 @@ export const SERVICE_TYPES = {
 };
 
 export const AVATAR_IMAGE_DEFAULT = {
-  MALE: "https://img.icons8.com/dotty/256/user-male.png",
-  FEMALE: "https://img.icons8.com/dotty/256/user-female.png",
-  OTHER: "https://img.icons8.com/ios/256/drag-gender-neutral.png",
+  MALE: "https://images.unsplash.com/photo-1627672360124-4ed09583e14c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80",
+  FEMALE:
+    "https://images.unsplash.com/photo-1670834169539-feed72d15b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+  OTHER:
+    "https://images.unsplash.com/photo-1627693685101-687bf0eb1222?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80",
 };
